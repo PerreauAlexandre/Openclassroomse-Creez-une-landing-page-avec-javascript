@@ -32,6 +32,9 @@ modalClose.addEventListener("click", () => {
 // close valid form
 closeBtn.addEventListener("click", () => {
   modalbg.style.display = "none";
+  form.style.opacity = "1";
+  validForm.style.display = "none"
+  cleanModal();
 });
 
 // event listener on the form to listen for the submit
@@ -154,5 +157,26 @@ function testChecked(dataId) {
   else {
     parentData.dataset.errorVisible = "false";
     return true;
+  }
+}
+
+// clean all inputs of the modal
+function cleanModal() {
+  const formInputs = document.querySelectorAll("input");
+  for (const input of formInputs) {
+    if (input.type === "radio" && input.checked) {
+      input.checked = false;
+    }
+    else if (input.type === "checkbox") {
+      if (input.id === "checkbox1") {
+        input.checked = true;
+      }
+      else {
+        input.checked = false;
+      }
+    }
+    else {
+      input.value = "";
+    }
   }
 }
